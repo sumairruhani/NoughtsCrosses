@@ -1,0 +1,84 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+:root {
+  --box-size: 100px;
+  --mark-size: calc(var(--box-size) * 0.9);
+}
+
+body {
+  margin: 0;
+  background-color: rgb(28, 28, 28);
+}
+
+.table {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.box {
+  width: var(--box-size);
+  height: var(--box-size);
+  background-color: rgb(135, 135, 135);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.box:first-child,
+.box:nth-child(2),
+.box:nth-child(3) {
+  border-top: none;
+}
+.box:nth-child(3n + 1) {
+  border-left: none;
+}
+.box:nth-child(3n + 3) {
+  border-right: none;
+}
+.box:last-child,
+.box:nth-child(8),
+.box:nth-child(7) {
+  border-bottom: none;
+}
+
+.box.x::before,
+.box.x::after {
+  position: absolute;
+  content: "";
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: rgb(28, 28, 28);
+}
+.box.x::before {
+  transform: rotate(45deg);
+}
+.box.x::after {
+  transform: rotate(-45deg);
+}
+
+.box.circle::before,
+.box.circle::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+}
+.box.circle::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background-color: rgb(28, 28, 28);
+}
+.box.circle::after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: rgb(135, 135, 135);
+}
