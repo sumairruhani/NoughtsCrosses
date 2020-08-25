@@ -4,13 +4,14 @@
   box-sizing: border-box;
 }
 :root {
-  --box-size: 100px;
+  --box-size: 130px;
   --mark-size: calc(var(--box-size) * 0.9);
 }
 
 body {
   margin: 0;
   background-color: rgb(28, 28, 28);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .table {
@@ -33,6 +34,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 .box:first-child,
 .box:nth-child(2),
@@ -50,35 +52,87 @@ body {
 .box:nth-child(7) {
   border-bottom: none;
 }
+.box.x,
+.box.circle {
+  cursor: not-allowed;
+}
 
 .box.x::before,
-.box.x::after {
+.box.x::after,
+.box.circle::before {
+  background-color: rgb(28, 28, 28);
+}
+
+.table.x .box:not(.x):not(.circle):hover::before,
+.table.x .box:not(.x):not(.circle):hover::after,
+.table.circle .table:not(.x):not(.circle):hover:before {
+  background-color: rgb(28, 28, 28);
+}
+
+.box.x::before,
+.box.x::after,
+.table.x .box:not(.x):not(.circle):hover::before,
+.table.x .box:not(.x):not(.circle):hover::after {
   position: absolute;
   content: "";
   width: calc(var(--mark-size) * 0.15);
   height: var(--mark-size);
-  background-color: rgb(28, 28, 28);
 }
-.box.x::before {
+.box.x::before,
+.table.x .box:not(.x):not(.circle):hover::before {
   transform: rotate(45deg);
 }
-.box.x::after {
+.box.x::after,
+.table.x .box:not(.x):not(.circle):hover::after {
   transform: rotate(-45deg);
 }
 
 .box.circle::before,
-.box.circle::after {
+.box.circle::after,
+.table.circle .box:not(.x):not(.circle):hover::before,
+.table.circle .box:not(.x):not(.circle):hover::after {
   position: absolute;
   content: "";
   border-radius: 50%;
 }
-.box.circle::before {
+.box.circle::before,
+.table.circle .box:not(.x):not(.circle):hover::before {
   width: var(--mark-size);
   height: var(--mark-size);
-  background-color: rgb(28, 28, 28);
+  background-color: rgb(65, 65, 65);
 }
-.box.circle::after {
+.box.circle::after,
+.table.circle .box:not(.x):not(.circle):hover::after {
   width: calc(var(--mark-size) * 0.7);
   height: calc(var(--mark-size) * 0.7);
   background-color: rgb(135, 135, 135);
+}
+.win-text {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 0, 0, 0.185);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 52px;
+  flex-direction: column;
+}
+.win-text button {
+  font-size: 40px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid white;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.win-text button:hover {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border-color: rgb(255, 255, 255);
+}
+.win-text.show {
+  display: flex;
 }
